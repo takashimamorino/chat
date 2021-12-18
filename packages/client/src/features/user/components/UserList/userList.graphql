@@ -1,0 +1,8 @@
+query UserList {
+  users {
+    __typename
+    id
+    name
+    email
+  }
+}

@@ -1,0 +1,17 @@
+overwrite: true
+schema: ../server/src/schemas/**/*.graphql
+documents: src/**/*.graphql
+generates:
+  src/types/graphql.ts:
+    plugins:
+      - typescript
+      - urql-introspection
+  ./:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: /src/types/graphql
+    plugins:
+      - typescript-operations
+      - typed-document-node
+      - urql-introspection

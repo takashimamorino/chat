@@ -1,7 +1,10 @@
 import { QueryResolvers, User } from 'src/types/graphql';
 
 const Query: QueryResolvers = {
-  users: () => users,
+  users: () => {
+    console.log('aaaaaaa');
+    return users;
+  },
 };
 
 export const userResolver = { Query };
