@@ -1,0 +1,8 @@
+"""
+ユーザー
+"""
+type User {
+  id: ID!
+  name: String!
+  email: EmailAddress!
+}

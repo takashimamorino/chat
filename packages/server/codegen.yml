@@ -1,0 +1,12 @@
+overwrite: true
+schema: src/schemas/**/*.graphql
+documents: null
+generates:
+  src/types/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-resolvers
+    config:
+      defaultScalarType: unknown
+      scalars:
+        EmailAddress: string

@@ -1,8 +1,7 @@
 {
   "name": "chat",
   "workspaces": [
-    "packages/*",
-    "client"
+    "packages/*"
   ],
   "scripts": {
     "format": "prettier --write .",

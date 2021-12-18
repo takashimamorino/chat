@@ -1,0 +1,10 @@
+type Query {
+  """
+  全てのユーザー
+  """
+  users: [User]!
+  """
+  特定のユーザー
+  """
+  user(id: ID!): User!
+}
