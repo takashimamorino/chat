@@ -1,0 +1,19 @@
+{
+  "name": "chat",
+  "workspaces": [
+    "packages/*",
+    "client"
+  ],
+  "scripts": {
+    "format": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "2.5.1"
+  }
+}
