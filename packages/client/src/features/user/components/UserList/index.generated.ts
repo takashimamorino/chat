@@ -6,9 +6,7 @@ export type UserListQueryVariables = Types.Exact<{ [key: string]: never }>;
 export type UserListQuery = {
   __typename?: 'Query';
   users: Array<
-    | { __typename: 'User'; id: string; name: string; email: any }
-    | null
-    | undefined
+    { __typename: 'User'; id: string; name: string } | null | undefined
   >;
 };
 
@@ -31,7 +29,6 @@ export const UserListDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
               ],
             },
           },

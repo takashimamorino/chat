@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import { useQuery } from 'urql';
-import { UserListDocument } from './userList.generated';
+import { UserListDocument } from './index.generated';
 
 export const UserList: VFC = () => {
   const [{ data, fetching, error }] = useQuery({ query: UserListDocument });

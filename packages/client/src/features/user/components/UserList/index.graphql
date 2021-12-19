@@ -3,6 +3,5 @@ query UserList {
     __typename
     id
     name
-    email
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "server",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
+    "dev": "NODE_ENV=local ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/index.ts",
     "generate:gql": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
@@ -9,7 +9,9 @@
     "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.1",
     "@graphql-tools/schema": "^8.3.1",
+    "@supabase/supabase-js": "^1.28.5",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.2",
     "graphql": "^16.2.0",
     "graphql-helix": "^1.11.0",
