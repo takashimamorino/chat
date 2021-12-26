@@ -27,6 +27,17 @@ export type Scalars = {
   EmailAddress: string;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** ユーザー登録 */
+  registerUser: RegisterUserPayload;
+};
+
+export type MutationRegisterUserArgs = {
+  id: Scalars['ID'];
+  input: UserInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** 特定のユーザー */
@@ -39,11 +50,21 @@ export type QueryUserArgs = {
   id: Scalars['ID'];
 };
 
+export type RegisterUserPayload = {
+  __typename?: 'RegisterUserPayload';
+  id: Scalars['ID'];
+};
+
 /** ユーザー */
 export type User = {
   __typename?: 'User';
   email: Scalars['EmailAddress'];
   id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
+export type UserInput = {
+  email: Scalars['String'];
   name: Scalars['String'];
 };
 
@@ -157,9 +178,12 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  RegisterUserPayload: ResolverTypeWrapper<RegisterUserPayload>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
+  UserInput: UserInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -167,15 +191,30 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   EmailAddress: Scalars['EmailAddress'];
   ID: Scalars['ID'];
+  Mutation: {};
   Query: {};
+  RegisterUserPayload: RegisterUserPayload;
   String: Scalars['String'];
   User: User;
+  UserInput: UserInput;
 };
 
 export interface EmailAddressScalarConfig
   extends GraphQLScalarTypeConfig<ResolversTypes['EmailAddress'], any> {
   name: 'EmailAddress';
 }
+
+export type MutationResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']
+> = {
+  registerUser?: Resolver<
+    ResolversTypes['RegisterUserPayload'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationRegisterUserArgs, 'id' | 'input'>
+  >;
+};
 
 export type QueryResolvers<
   ContextType = any,
@@ -194,6 +233,14 @@ export type QueryResolvers<
   >;
 };
 
+export type RegisterUserPayloadResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['RegisterUserPayload'] = ResolversParentTypes['RegisterUserPayload']
+> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']
@@ -206,6 +253,8 @@ export type UserResolvers<
 
 export type Resolvers<ContextType = any> = {
   EmailAddress?: GraphQLScalarType;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  RegisterUserPayload?: RegisterUserPayloadResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

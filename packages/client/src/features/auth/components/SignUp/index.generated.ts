@@ -1,34 +1,104 @@
 import * as Types from '../../../../types/graphql';
 
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
-export type UserListQueryVariables = Types.Exact<{ [key: string]: never }>;
+export type SignUpMutationVariables = Types.Exact<{
+  id: Types.Scalars['ID'];
+  name: Types.Scalars['String'];
+  email: Types.Scalars['String'];
+}>;
 
-export type UserListQuery = {
-  __typename?: 'Query';
-  users: Array<
-    { __typename: 'User'; id: string; name: string } | null | undefined
-  >;
+export type SignUpMutation = {
+  __typename?: 'Mutation';
+  registerUser: { __typename?: 'RegisterUserPayload'; id: string };
 };
 
-export const UserListDocument = {
+export const SignUpDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'UserList' },
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'SignUp' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'ID' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'email' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'users' },
+            name: { kind: 'Name', value: 'registerUser' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'name' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'name' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'email' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'email' },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
               ],
             },
           },
@@ -36,7 +106,7 @@ export const UserListDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<UserListQuery, UserListQueryVariables>;
+} as unknown as DocumentNode<SignUpMutation, SignUpMutationVariables>;
 import { IntrospectionQuery } from 'graphql';
 export default {
   __schema: {

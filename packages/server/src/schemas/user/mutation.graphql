@@ -1,0 +1,15 @@
+type Mutation {
+  """
+  ユーザー登録
+  """
+  registerUser(id: ID!, input: UserInput!): RegisterUserPayload!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+}
+
+type RegisterUserPayload {
+  id: ID!
+}

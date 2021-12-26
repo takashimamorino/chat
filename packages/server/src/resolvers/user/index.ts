@@ -1,4 +1,9 @@
-import { QueryResolvers, User } from 'src/types/graphql';
+import {
+  QueryResolvers,
+  MutationResolvers,
+  RegisterUserPayload,
+  User,
+} from 'src/types/graphql';
 import { UserClient } from '../../datasources/user';
 
 const userClient = new UserClient();
@@ -36,4 +41,24 @@ const Query: QueryResolvers = {
   },
 };
 
-export const userResolver = { Query };
+const Mutation: MutationResolvers = {
+  registerUser: async (_, params) => {
+    const res = await userClient.registerUser({
+      id: params.id,
+      name: params.input.name,
+      email: params.input.email,
+    });
+
+    if (res === undefined) {
+      throw new Error('User not found');
+    }
+
+    const data: RegisterUserPayload = {
+      id: res.id,
+    };
+
+    return data;
+  },
+};
+
+export const userResolver = { Query, Mutation };

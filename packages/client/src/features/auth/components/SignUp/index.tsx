@@ -1,6 +1,8 @@
 import { type VFC, type ChangeEvent, type FormEvent, useState } from 'react';
-import { supabase } from '../../../../clients/supabase';
 import { type ApiError } from '@supabase/supabase-js';
+import { useMutation } from 'urql';
+import { supabase } from '../../../../clients/supabase';
+import { SignUpDocument } from './index.generated';
 
 export const SignUp: VFC = () => {
   const [error, setError] = useState<ApiError | null>(null);
@@ -11,6 +13,7 @@ export const SignUp: VFC = () => {
     email: '',
     password: '',
   });
+  const [_, registerUser] = useMutation(SignUpDocument);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, [event.target.name]: event.target.value });
@@ -22,11 +25,14 @@ export const SignUp: VFC = () => {
     password: string
   ) => {
     event.preventDefault();
-    const { error } = await supabase.auth.signUp({
+    const { user, error } = await supabase.auth.signUp({
       email,
       password,
     });
     setError(error);
+    if (user) {
+      registerUser({ id: user.id, name: email, email: email });
+    }
   };
 
   return (

@@ -1,0 +1,5 @@
+mutation SignUp($id: ID!, $name: String!, $email: String!) {
+  registerUser(id: $id, input: { name: $name, email: $email }) {
+    id
+  }
+}

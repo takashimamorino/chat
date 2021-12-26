@@ -50,4 +50,28 @@ export class UserClient {
 
     return user;
   }
+
+  public async registerUser(input: User): Promise<User | undefined> {
+    const { error } = await supabase
+      .from<User>('users')
+      .insert([{ id: input.id, name: input.name, email: input.email }]);
+    if (error) {
+      console.error(error);
+      throw error;
+    }
+
+    const data = await this.userById(input.id);
+
+    if (data === undefined) {
+      return undefined;
+    }
+
+    const user: User = {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+    };
+
+    return user;
+  }
 }

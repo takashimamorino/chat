@@ -19,6 +19,17 @@ export type Scalars = {
   EmailAddress: any;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** ユーザー登録 */
+  registerUser: RegisterUserPayload;
+};
+
+export type MutationRegisterUserArgs = {
+  id: Scalars['ID'];
+  input: UserInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** 特定のユーザー */
@@ -31,11 +42,21 @@ export type QueryUserArgs = {
   id: Scalars['ID'];
 };
 
+export type RegisterUserPayload = {
+  __typename?: 'RegisterUserPayload';
+  id: Scalars['ID'];
+};
+
 /** ユーザー */
 export type User = {
   __typename?: 'User';
   email: Scalars['EmailAddress'];
   id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
+export type UserInput = {
+  email: Scalars['String'];
   name: Scalars['String'];
 };
 
@@ -45,9 +66,51 @@ export default {
     queryType: {
       name: 'Query',
     },
-    mutationType: null,
+    mutationType: {
+      name: 'Mutation',
+    },
     subscriptionType: null,
     types: [
+      {
+        kind: 'OBJECT',
+        name: 'Mutation',
+        fields: [
+          {
+            name: 'registerUser',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'RegisterUserPayload',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Any',
+                  },
+                },
+              },
+              {
+                name: 'input',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Any',
+                  },
+                },
+              },
+            ],
+          },
+        ],
+        interfaces: [],
+      },
       {
         kind: 'OBJECT',
         name: 'Query',
@@ -86,6 +149,24 @@ export default {
                   name: 'User',
                   ofType: null,
                 },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'RegisterUserPayload',
+        fields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Any',
               },
             },
             args: [],

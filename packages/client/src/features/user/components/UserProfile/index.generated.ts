@@ -64,9 +64,51 @@ export default {
     queryType: {
       name: 'Query',
     },
-    mutationType: null,
+    mutationType: {
+      name: 'Mutation',
+    },
     subscriptionType: null,
     types: [
+      {
+        kind: 'OBJECT',
+        name: 'Mutation',
+        fields: [
+          {
+            name: 'registerUser',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'OBJECT',
+                name: 'RegisterUserPayload',
+                ofType: null,
+              },
+            },
+            args: [
+              {
+                name: 'id',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Any',
+                  },
+                },
+              },
+              {
+                name: 'input',
+                type: {
+                  kind: 'NON_NULL',
+                  ofType: {
+                    kind: 'SCALAR',
+                    name: 'Any',
+                  },
+                },
+              },
+            ],
+          },
+        ],
+        interfaces: [],
+      },
       {
         kind: 'OBJECT',
         name: 'Query',
@@ -105,6 +147,24 @@ export default {
                   name: 'User',
                   ofType: null,
                 },
+              },
+            },
+            args: [],
+          },
+        ],
+        interfaces: [],
+      },
+      {
+        kind: 'OBJECT',
+        name: 'RegisterUserPayload',
+        fields: [
+          {
+            name: 'id',
+            type: {
+              kind: 'NON_NULL',
+              ofType: {
+                kind: 'SCALAR',
+                name: 'Any',
               },
             },
             args: [],
